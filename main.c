@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main()
+v main()
 {
     bool con = true;
     int op;
