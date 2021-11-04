@@ -1,0 +1,2 @@
+nome;jogos;favoritos
+gabriel;60;DOOM

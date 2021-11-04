@@ -1,0 +1,2 @@
+nome;jogos
+Sony;1

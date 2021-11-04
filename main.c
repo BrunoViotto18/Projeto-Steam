@@ -11,7 +11,9 @@ int main()
     setlocale(LC_ALL, "");
     bool con = true;
     int op;
-    char caminho[100] = "games";
+    char caminho[100] = "games.txt";
+    char caminho2[100] = "publishers.txt";
+    char caminho3[100] = "usuarios.txt";
     while (con)
     {
         printf("MENU\n[ 1 ] Listar\n[ 2 ] Adicionar\n[ 3 ] Remover\n[ 4 ] Sair\nEscolha:\n");
@@ -30,10 +32,12 @@ int main()
                     break;
 
                 case 2:
-                    Le_Arq(caminho);
+                    Le_Arq2(caminho2);
+                    break;
+                case 3:
+                    Le_Arq3(caminho3);
                     break;
                 case 4:
-                    Le_Arq(caminho);
                     break;
                 }
                 break;

@@ -22,19 +22,20 @@ struct User
     struct Game biblioteca[100];
 };*/
 
- void Le_Arq()
+ void Le_Arq(char caminho[100])
 {
     FILE *arq;
     char linha[1024];
     int row = 0;
     int column = 0;
-    arq = fopen("games.txt", "rt");
+    arq = fopen(caminho, "rt");
 
     if(!arq)
     {
         printf("Não foi possível ler o arquivo\n");
     }
-    while (fgets(linha,1024, arq)) {
+    while (fgets(linha,1024, arq))
+        {
             column = 0;
             row++;
 
@@ -74,6 +75,108 @@ struct User
         // Close the file
         fclose(arq);
     }
+    void Le_Arq2(char caminho[100])
+{
+    FILE *arq;
+    char linha[1024];
+    int row = 0;
+    int column = 0;
+    arq = fopen(caminho, "rt");
+
+    if(!arq)
+    {
+        printf("Não foi possível ler o arquivo\n");
+    }
+    while (fgets(linha,1024, arq))
+        {
+            column = 0;
+            row++;
+
+            // To avoid printing of column
+            // names in file can be changed
+            // according to need
+            if (row == 1)
+                continue;
+
+            // Splitting the data
+            char* value = strtok(linha, ";");
+
+            while (value) {
+                // Column 1
+                if (column == 0) {
+                    printf("Nome:");
+                }
+
+                // Column 2
+                if (column == 1) {
+                    printf("\tJogos:");
+                }
+
+                printf("%s", value);
+                value = strtok(NULL, ";");
+                column++;
+            }
+
+            printf("\n");
+        }
+
+        // Close the file
+        fclose(arq);
+    }
+     void Le_Arq3(char caminho[100])
+{
+    FILE *arq;
+    char linha[1024];
+    int row = 0;
+    int column = 0;
+    arq = fopen(caminho, "rt");
+
+    if(!arq)
+    {
+        printf("Não foi possível ler o arquivo\n");
+    }
+    while (fgets(linha,1024, arq))
+        {
+            column = 0;
+            row++;
+
+            // To avoid printing of column
+            // names in file can be changed
+            // according to need
+            if (row == 1)
+                continue;
+
+            // Splitting the data
+            char* value = strtok(linha, ";");
+
+            while (value) {
+                // Column 1
+                if (column == 0) {
+                    printf("Nome: ");
+                }
+
+                // Column 2
+                if (column == 1) {
+                    printf("\t Jogos: ");
+                }
+
+                // Column 3
+                if (column == 2) {
+                    printf("\t Favoritos: ");
+                }
+
+                printf("%s", value);
+                value = strtok(NULL, ";");
+                column++;
+            }
+
+            printf("\n");
+        }
+
+        // Close the file
+        fclose(arq);
+    }
+
 
 
 
