@@ -1,0 +1,2 @@
+Jogo;Publisher;Genero
+God Of War;Sony;Hack'n'Slash

@@ -2,7 +2,7 @@
 #define STEAMDB_H_INCLUDED
 //#define <string.h>
 
-struct Game
+/*struct Game
 {
     char nome[100];
     char genero[100];
@@ -20,23 +20,21 @@ struct User
 {
     char userName[100];
     struct Game biblioteca[100];
-};
+};*/
 
- /*Le_Arq(char[])
+ void Le_Arq()
 {
     FILE *arq;
-    char linha[100];
-    char *result;
+    char linha[1024];
     int row = 0;
     int column = 0;
-    arq = fopen(char[], "read");
+    arq = fopen("games.txt", "rt");
 
     if(!arq)
     {
-        printf("Não foi possível ler o arquivo");
+        printf("Não foi possível ler o arquivo\n");
     }
-    while (fgets(linha,
-                     100, arq)) {
+    while (fgets(linha,1024, arq)) {
             column = 0;
             row++;
 
@@ -74,13 +72,12 @@ struct User
         }
 
         // Close the file
-        fclose(fp);
+        fclose(arq);
     }
-}*/
 
 
 
-int len_line(FILE *arq, int linha_index)
+/*int len_line(FILE *arq, int linha_index)
 {
     char *linha;
     for (int i = 1; i <= linha_index; i++)
@@ -110,6 +107,6 @@ char* get_line(FILE *arq, int linha_index)
     }
     fgets(linha, 1024, arq);
     return linha;
-}
+}*/
 
 #endif // STEAMDB_H_INCLUDED

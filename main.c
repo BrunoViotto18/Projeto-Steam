@@ -9,51 +9,41 @@
 int main()
 {
     setlocale(LC_ALL, "");
-
-    FILE *arq;
-
-    arq = fopen("Games.csv", "rt");
-
-    printf("%d", len_line(arq, 1));
-
-    /*bool con = true;
+    bool con = true;
     int op;
-    char caminho[100];
+    char caminho[100] = "games";
     while (con)
     {
-        printf("MENU\n[ 1 ] Listar\n[ 2 ] Adicionar\n[ 3 ] Remover\n[ 4 ] Sair\nEscolha: ");
+        printf("MENU\n[ 1 ] Listar\n[ 2 ] Adicionar\n[ 3 ] Remover\n[ 4 ] Sair\nEscolha:\n");
         scanf("%d", &op);
 
 
         switch (op)
         {
             case 1:
-                printf("ADICIONAR: \n[ 1 ] Jogos \n[ 2 ] Publoishers \n[ 3 ] Usuarios \n \n[ 4 ] Voltar ao menu\nEscolha");
+                printf("LISTAR: \n[ 1 ] Jogos \n[ 2 ] Publishers \n[ 3 ] Usuarios \n \n[ 4 ] Voltar ao menu\nEscolha:\n");
                 scanf("%d", &op);
                 switch(op)
                 {
                 case 1:
-                    //caminho = "games.csv";
-                    //Le_arq(caminho);
+                    Le_Arq(caminho);
                     break;
 
                 case 2:
-                    caminho = "games.csv";
-                    Le_arq(caminho);
+                    Le_Arq(caminho);
                     break;
                 case 4:
-                    caminho = "games.csv";
-                    Le_arq(caminho);
+                    Le_Arq(caminho);
                     break;
                 }
                 break;
 
             case 2:
-                printf("ADICIONAR: \n[ 1 ] Jogos \n[ 2 ] Publoishers \n[ 3 ] Usuarios \n \n[ 4 ] Voltar ao menu\nEscolha");
+                printf("ADICIONAR: \n[ 1 ] Jogos \n[ 2 ] Publishers \n[ 3 ] Usuarios \n \n[ 4 ] Voltar ao menu\nEscolha:\n");
                 break;
 
             case 3:
-                printf("REMOVER: \n[ 1 ] Jogos \n[ 2 ] Publoishers \n[ 3 ] Usuarios \n \n[ 4 ] Voltar ao menu\nEscolha");
+                printf("REMOVER: \n[ 1 ] Jogos \n[ 2 ] Publishers \n[ 3 ] Usuarios \n[ 4 ] Voltar ao menu\nEscolha:\n");
                 break;
 
             case 4:
@@ -64,5 +54,5 @@ int main()
                 printf("Opção inválida! Tente novamente.");
                 break;
         }
-    }*/
+    }
 }
