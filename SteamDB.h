@@ -79,7 +79,17 @@ struct User
     }
 }*/
 
-
+void seek_line(FILE *arq, int linha_index)
+{
+    int counter = 1;
+    while(counter < linha_index)
+    {
+        if(fgetc(arq) == '\n')
+        {
+            counter++;
+        }
+    }
+}
 
 int len_line(FILE *arq, int linha_index)
 {
@@ -90,9 +100,11 @@ int len_line(FILE *arq, int linha_index)
     }
     fgets(linha, 1024, arq);
     int index = 0;
+    seek_line(arq, linha_index);
     for (int i = 0; i < 1024; i++)
     {
-        if (strcmp(int linha[i], '\\') == 0 && strcmp(linha[i+1], 'n') == 0)
+        char c = fgetc(arq);
+        if (c == '\n' || c == EOF)
         {
             return index;
         }

@@ -14,7 +14,7 @@ int main()
 
     arq = fopen("Games.csv", "rt");
 
-    printf("%d", len_line(arq, 1));
+    printf("%s", get_line(arq, 5));
 
     /*bool con = true;
     int op;

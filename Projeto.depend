@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1636032103 source:c:\users\aluno\desktop\projeto-steam\main.c
+1636035643 source:c:\users\aluno\desktop\projeto-steam\main.c
 	<stdio.h>
 	<stdlib.h>
 	<stdbool.h>
@@ -8,6 +8,6 @@
 	<string.h>
 	"SteamDB.h"
 
-1636033325 c:\users\aluno\desktop\projeto-steam\steamdb.h
+1636035653 c:\users\aluno\desktop\projeto-steam\steamdb.h
 	<string.h>
 
