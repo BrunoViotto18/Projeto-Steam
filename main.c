@@ -6,7 +6,7 @@
 #include <string.h>
 #include "SteamDB.h"
 
-int main()
+void main()
 {
     setlocale(LC_ALL, "");
 
@@ -14,7 +14,7 @@ int main()
 
     arq = fopen("Games.csv", "rt");
 
-    printf("%s", get_line(arq, 5));
+    printf("%s", get_item(arq, 3, 3));
 
     /*bool con = true;
     int op;

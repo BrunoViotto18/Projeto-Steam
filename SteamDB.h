@@ -81,6 +81,7 @@ struct User
 
 void seek_line(FILE *arq, int linha_index)
 {
+    rewind(arq);
     int counter = 1;
     while(counter < linha_index)
     {
@@ -93,6 +94,7 @@ void seek_line(FILE *arq, int linha_index)
 
 int len_line(FILE *arq, int linha_index)
 {
+    rewind(arq);
     char *linha;
     for (int i = 1; i < linha_index; i++)
     {
@@ -115,6 +117,7 @@ int len_line(FILE *arq, int linha_index)
 
 char* get_line(FILE *arq, int linha_index)
 {
+    rewind(arq);
     char *linha;
     for (int i = 1; i < linha_index; i++)
     {
@@ -122,6 +125,34 @@ char* get_line(FILE *arq, int linha_index)
     }
     fgets(linha, 1024, arq);
     return linha;
+}
+
+char* get_item(FILE *arq, int linha_index, int collumn)
+{
+    rewind(arq);
+    seek_line(arq, linha_index);
+    int counter = 1;
+    while (counter < collumn)
+    {
+        if (fgetc(arq) == ';')
+        {
+            counter++;
+        }
+    }
+    char *txt;
+    int i = 0;
+    while (true)
+    {
+        printf("A");
+        char c = fgetc(arq);
+        if (c == ';' || c == '\n')
+        {
+            break;
+        }
+        txt[i] = c;
+        i++;
+    }
+    return txt;
 }
 
 #endif // STEAMDB_H_INCLUDED
