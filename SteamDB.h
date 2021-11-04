@@ -1,6 +1,7 @@
 #ifndef STEAMDB_H_INCLUDED
 #define STEAMDB_H_INCLUDED
-//#define <string.h>
+
+#include <string.h>
 
 struct Game
 {
@@ -83,7 +84,7 @@ struct User
 int len_line(FILE *arq, int linha_index)
 {
     char *linha;
-    for (int i = 1; i <= linha_index; i++)
+    for (int i = 1; i < linha_index; i++)
     {
         fgets(linha, 1024, arq);
     }
@@ -91,11 +92,10 @@ int len_line(FILE *arq, int linha_index)
     int index = 0;
     for (int i = 0; i < 1024; i++)
     {
-        if (strcmp(linha[i], "\\") == 0 && strcmp(linha[i+1], "n") == 0)
+        if (strcmp(int linha[i], '\\') == 0 && strcmp(linha[i+1], 'n') == 0)
         {
             return index;
         }
-        printf("AAAAA");
         index++;
     }
     return -1;
@@ -104,7 +104,7 @@ int len_line(FILE *arq, int linha_index)
 char* get_line(FILE *arq, int linha_index)
 {
     char *linha;
-    for (int i = 1; i <= linha_index; i++)
+    for (int i = 1; i < linha_index; i++)
     {
         fgets(linha, 1024, arq);
     }
