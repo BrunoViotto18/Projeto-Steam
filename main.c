@@ -2,29 +2,58 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <locale.h>
+#include <conio.h>
+#include <string.h>
+#include "SteamDB.h"
 
-void main()
+int main()
 {
     setlocale(LC_ALL, "");
 
-    bool con = true;
+    FILE *arq;
+
+    arq = fopen("Games.csv", "rt");
+
+    printf("%d", len_line(arq, 1));
+
+    /*bool con = true;
     int op;
+    char caminho[100];
     while (con)
     {
-        printf("MENU\n[ 1 ] Listar\n[ 2 ] Adiconar\n[ 3 ] Remover\n[ 4 ] Sair\nEscolha: ");
+        printf("MENU\n[ 1 ] Listar\n[ 2 ] Adicionar\n[ 3 ] Remover\n[ 4 ] Sair\nEscolha: ");
         scanf("%d", &op);
+
 
         switch (op)
         {
             case 1:
-                printf("LISTAR\n[ 1 ] Jogo\n[ 2 ] Publisher\n[ 3 ] User\n[ 4 ] Voltar ao Menu\nEscolha: ");
+                printf("ADICIONAR: \n[ 1 ] Jogos \n[ 2 ] Publoishers \n[ 3 ] Usuarios \n \n[ 4 ] Voltar ao menu\nEscolha");
                 scanf("%d", &op);
+                switch(op)
+                {
+                case 1:
+                    //caminho = "games.csv";
+                    //Le_arq(caminho);
+                    break;
+
+                case 2:
+                    caminho = "games.csv";
+                    Le_arq(caminho);
+                    break;
+                case 4:
+                    caminho = "games.csv";
+                    Le_arq(caminho);
+                    break;
+                }
                 break;
 
             case 2:
+                printf("ADICIONAR: \n[ 1 ] Jogos \n[ 2 ] Publoishers \n[ 3 ] Usuarios \n \n[ 4 ] Voltar ao menu\nEscolha");
                 break;
 
             case 3:
+                printf("REMOVER: \n[ 1 ] Jogos \n[ 2 ] Publoishers \n[ 3 ] Usuarios \n \n[ 4 ] Voltar ao menu\nEscolha");
                 break;
 
             case 4:
@@ -35,5 +64,5 @@ void main()
                 printf("Opção inválida! Tente novamente.");
                 break;
         }
-    }
+    }*/
 }
