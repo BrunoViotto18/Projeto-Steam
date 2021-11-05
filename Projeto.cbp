@@ -32,7 +32,9 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="Games.csv" />
+		<Unit filename="Publishers.csv" />
 		<Unit filename="SteamDB.h" />
+		<Unit filename="Users.csv" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

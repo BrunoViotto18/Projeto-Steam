@@ -2,8 +2,9 @@
 #define STEAMDB_H_INCLUDED
 
 #include <string.h>
+#include <locale.h>
 
-struct Game
+/*struct Game
 {
     char nome[100];
     char genero[100];
@@ -21,7 +22,7 @@ struct User
 {
     char userName[100];
     struct Game biblioteca[100];
-};
+};*/
 
  /*Le_Arq(char[])
 {
@@ -127,10 +128,49 @@ char* get_line(FILE *arq, int linha_index)
     return linha;
 }
 
-char* get_item(FILE *arq, int linha_index, int collumn)
+count_collumns(FILE* arq)
 {
     rewind(arq);
-    seek_line(arq, linha_index);
+    int counter = 1;
+    while(true)
+    {
+        char c = fgetc(arq);
+        if (c == '\n' || c == EOF)
+        {
+            break;
+        }
+        else if (c == ';')
+        {
+            counter++;
+        }
+    }
+    return counter;
+}
+
+int count_lines(FILE* arq)
+{
+    rewind(arq);
+    int counter = 1;
+    char* linha;
+    while(true)
+    {
+        char c = fgetc(arq);
+        if (c == '\n')
+        {
+            counter += 1;
+        }
+        else if (c == EOF)
+        {
+            break;
+        }
+    }
+    return counter;
+}
+
+char* get_item(FILE *arq, int line, int collumn, char* vetor)
+{
+    rewind(arq);
+    seek_line(arq, line);
     int counter = 1;
     while (counter < collumn)
     {
@@ -139,20 +179,63 @@ char* get_item(FILE *arq, int linha_index, int collumn)
             counter++;
         }
     }
-    char *txt;
     int i = 0;
     while (true)
     {
-        printf("A");
         char c = fgetc(arq);
         if (c == ';' || c == '\n')
         {
             break;
         }
-        txt[i] = c;
+        vetor[i] = c;
         i++;
     }
-    return txt;
+    return vetor;
+}
+
+void listar(FILE *arq)
+{
+    setlocale(LC_ALL, "");
+    rewind(arq);
+    int linhas = count_lines(arq);
+    int colunas = count_collumns(arq);
+
+    for (int i = 2; i < linhas; i++)
+    {
+        for (int j = 1; j <= colunas; j++)
+        {
+            char chave[128];
+            char valor[128];
+            get_item(arq, 1, j, chave);
+            get_item(arq, i, j, valor);
+            printf("%s: %s\t", chave, valor);
+            for (int k = 0; k < 128; k++)
+            {
+                chave[k] = '\0';
+                valor[k] = '\0';
+            }
+        }
+        printf("\n\n");
+    }
+}
+
+void adicionar_jogo(FILE *arq, char* nome, char* genero, char* preco, char* avaliacao)
+{
+    seek_line(arq, count_lines(arq));
+    fputs(nome, arq);
+    fputs(";", arq);
+    fputs(genero, arq);
+    fputs(";", arq);
+    fputs(preco, arq);
+    fputs(";", arq);
+    fputs(avaliacao, arq);
+    fputs("\n", arq);
+    fprintf(arq, "%s;%s;%s;%s", nome, genero, preco, avaliacao);
+}
+
+void adicionar_cliente(FILE *arq)
+{
+
 }
 
 #endif // STEAMDB_H_INCLUDED
