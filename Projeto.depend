@@ -11,7 +11,7 @@
 1636037288 c:\users\aluno\desktop\projeto-steam\steamdb.h
 	<string.h>
 
-1636073641 source:c:\users\win8\desktop\github\projeto-steam\main.c
+1636324511 source:c:\users\win8\desktop\github\projeto-steam\main.c
 	<stdio.h>
 	<stdlib.h>
 	<stdbool.h>
@@ -20,7 +20,7 @@
 	<string.h>
 	"SteamDB.h"
 
-1636073951 c:\users\win8\desktop\github\projeto-steam\steamdb.h
+1636325616 c:\users\win8\desktop\github\projeto-steam\steamdb.h
 	<string.h>
 	<locale.h>
 
