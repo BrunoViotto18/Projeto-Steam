@@ -18,7 +18,10 @@ int main()
     publishers = fopen("Publishers.csv", "rt+");
     users = fopen("Users.csv", "rt+");
 
-    bool con = true;
+    adicionar_linha(jogos, "Digital Devil Saga;RPG;20;8\n");
+
+
+    /*bool con = true;
     int op;
 
     while (con)
@@ -166,7 +169,7 @@ int main()
                 printf("Opção inválida! Tente novamente.");
                 break;
         }
-    }
+    }*/
 
     fclose(jogos);
     fclose(publishers);

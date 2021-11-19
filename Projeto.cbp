@@ -35,6 +35,7 @@
 		<Unit filename="Publishers.csv" />
 		<Unit filename="SteamDB.h" />
 		<Unit filename="Teste.csv" />
+		<Unit filename="Teste2.csv" />
 		<Unit filename="Users.csv" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />

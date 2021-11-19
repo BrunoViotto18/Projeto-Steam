@@ -3,6 +3,8 @@
 
 #include <string.h>
 #include <locale.h>
+#include <unistd.h>
+#include <sys/types.h>
 
 struct Game
 {
@@ -12,7 +14,6 @@ struct Game
     int avaliacao;
 };
 
-/*
 struct Publisher
 {
     char nome[100];
@@ -23,64 +24,10 @@ struct User
 {
     char userName[100];
     struct Game biblioteca[100];
-};*/
+};
 
- /*Le_Arq(char[])
-{
-    FILE *arq;
-    char linha[100];
-    char *result;
-    int row = 0;
-    int column = 0;
-    arq = fopen(char[], "read");
 
-    if(!arq)
-    {
-        printf("Não foi possível ler o arquivo");
-    }
-    while (fgets(linha,
-                     100, arq)) {
-            column = 0;
-            row++;
-
-            // To avoid printing of column
-            // names in file can be changed
-            // according to need
-            if (row == 1)
-                continue;
-
-            // Splitting the data
-            char* value = strtok(linha, ";");
-
-            while (value) {
-                // Column 1
-                if (column == 0) {
-                    printf("Nome:");
-                }
-
-                // Column 2
-                if (column == 1) {
-                    printf("\tPublisher:");
-                }
-
-                // Column 3
-                if (column == 2) {
-                    printf("\tGenero:");
-                }
-
-                printf("%s", value);
-                value = strtok(NULL, ";");
-                column++;
-            }
-
-            printf("\n");
-        }
-
-        // Close the file
-        fclose(fp);
-    }
-}*/
-
+// Posiciona o cursor no começo de uma linha
 void seek_line(FILE *arq, int linha_index)
 {
     rewind(arq);
@@ -91,7 +38,8 @@ void seek_line(FILE *arq, int linha_index)
     while(counter < linha_index)
     {
         cursor++;
-        if(fgetc(arq) == '\n')
+        char c = fgetc(arq);
+        if(c == '\n' || c == EOF)
         {
             cursor++;
             counter++;
@@ -101,7 +49,7 @@ void seek_line(FILE *arq, int linha_index)
     fseek(arq, cursor, SEEK_SET);
 }
 
-//Retorna o tamanho de uma das linhas do arquivo
+// Retorna o tamanho de uma das linhas do arquivo
 int len_line(FILE *arq, int linha_index)
 {
     int cursor = ftell(arq);
@@ -133,7 +81,7 @@ int len_line(FILE *arq, int linha_index)
     return -1;
 }
 
-//Retorna a string da linha desejada
+// Armazena a string da linha desejada
 void get_line(FILE *arq, int linha_index, char* linha)
 {
     int cursor = ftell(arq);
@@ -149,7 +97,7 @@ void get_line(FILE *arq, int linha_index, char* linha)
     fseek(arq, cursor, SEEK_SET);
 }
 
-//Retorna o número de colunas do arquivo CSV
+// Retorna o número de colunas do arquivo CSV
 int count_collumns(FILE* arq, int linha)
 {
     int cursor = ftell(arq);
@@ -174,7 +122,7 @@ int count_collumns(FILE* arq, int linha)
     return counter;
 }
 
-//Retorna o número de linhas de um arquivo
+// Retorna o número de linhas de um arquivo
 int count_lines(FILE* arq)
 {
     int cursor = ftell(arq);
@@ -199,7 +147,7 @@ int count_lines(FILE* arq)
     return counter;
 }
 
-//Retorna o temanho do item referente a linha e coluna fornecidas;
+// Retorna o temanho do item referente a linha e coluna fornecidas;
 int len_item(FILE* arq, int line, int collumn)
 {
     int cursor = ftell(arq);
@@ -230,7 +178,7 @@ int len_item(FILE* arq, int line, int collumn)
     return counter;
 }
 
-//Retorna o item referente a linha e coluna fornecida
+// Retorna o item referente a linha e coluna fornecida
 void get_item(FILE *arq, int line, int collumn, char* vetor)
 {
     int cursor = ftell(arq);
@@ -263,8 +211,8 @@ void get_item(FILE *arq, int line, int collumn, char* vetor)
     fseek(arq, cursor, SEEK_SET);
 }
 
-//Retorna o número de caracateres de um arquivo (incluindo "\n" e "EOF")
-int length(FILE* arq)
+// Retorna o número de caracateres de um arquivo (incluindo "\n" e "EOF")
+int len(FILE* arq)
 {
     int cursor = ftell(arq);
 
@@ -281,7 +229,7 @@ int length(FILE* arq)
     return counter;
 }
 
-//Retorna uma string do arquivo de texto fornecido (incluindo caracters como "\n" e "EOF")
+// Retorna uma string do arquivo de texto fornecido (incluindo caracters como "\n" e "EOF")
 void get_file(FILE* arq, char* txt, int linha_index)
 {
     int cursor = ftell(arq);
@@ -300,6 +248,7 @@ void get_file(FILE* arq, char* txt, int linha_index)
     fseek(arq, cursor, SEEK_SET);
 }
 
+// Retorna a quantidade de caracteres de um arquivo até uma certa linha
 int length_until(FILE* arq, int linha_index)
 {
     int cursor = ftell(arq);
@@ -322,6 +271,7 @@ int length_until(FILE* arq, int linha_index)
     return counter;
 }
 
+// Armazena as primeiras X linhas do arquivo
 void get_file_until(FILE* arq, char* txt, int linha_index)
 {
     int cursor = ftell(arq);
@@ -340,11 +290,50 @@ void get_file_until(FILE* arq, char* txt, int linha_index)
             linha++;
         }
     }
+    txt[counter] = '\0';
 
     fseek(arq, cursor, SEEK_SET);
 }
 
-//Limpa um array
+// Retorna a quantidade de caracteres de um arquivo a partir de uma linha até o final do arquivo
+int length_from(FILE* arq, int linha_index)
+{
+    int cursor = ftell(arq);
+
+    seek_line(arq, linha_index);
+    int length = 0;
+
+    while(!feof(arq))
+    {
+        fgetc(arq);
+        length++;
+    }
+
+    fseek(arq, cursor, SEEK_SET);
+    return length;
+}
+
+// Armazena as ultimas linhas do arquivo a partir de uma certa linha
+void get_file_from(FILE* arq, char* txt, int linha_index)
+{
+    int cursor = ftell(arq);
+
+    seek_line(arq, linha_index);
+    int index = 0;
+
+    while (!feof(arq))
+    {
+        txt[index] = fgetc(arq);
+        index++;
+    }
+    txt[index-1] = '\0';
+
+    fseek(arq, cursor, SEEK_SET);
+}
+
+
+
+// Limpa um array
 void clear_array(char* vetor, int len)
 {
     for (int i = 0; i < len+1; i++)
@@ -354,7 +343,12 @@ void clear_array(char* vetor, int len)
 }
 
 
-//Printa o arquivo CSV jogos na tela
+
+/* === Funções Premium === */
+
+
+
+// Printa o arquivo CSV jogos na tela
 void listar_jogo(FILE *arq)
 {
     setlocale(LC_ALL, "");
@@ -384,7 +378,7 @@ void listar_jogo(FILE *arq)
     fseek(arq, cursor, SEEK_SET);
 }
 
-//Lista o arquivo CSV publishers e users na tela
+// Printa o arquivo CSV publishers e users na tela
 void listar(FILE* arq)
 {
     setlocale(LC_ALL, "");
@@ -416,31 +410,38 @@ void listar(FILE* arq)
     fseek(arq, cursor, SEEK_SET);
 }
 
-void remover(FILE* arq, int linha)
+// Remove uma linha do arquivo
+void remover_linha(FILE* arq, int linha)
+{
+    char txt1[length_until(arq, linha-1)];
+    char txt2[length_from(arq, linha+1)];
+    get_file_until(arq, txt1, linha-1);
+    get_file_from(arq, txt2, linha+1);
+
+    fseek(arq, 0, SEEK_SET);
+
+    fprintf(arq, "%s", txt1);
+    fprintf(arq, "%s", txt2);
+    ftruncate(fileno(arq), sizeof txt1 + sizeof txt2);
+
+    fseek(arq, 0, SEEK_END);
+}
+
+// Adiciona uma linha ao final do arquivo
+void adicionar_linha(FILE* arq, char* txt)
 {
     int cursor = ftell(arq);
 
-    seek_line(arq, linha);
-    fseek(arq, 0, SEEK_CUR);
+    fseek(arq, 0, SEEK_END);
 
-    while(true)
-    {
-        char c = fgetc(arq);
-
-        printf("%c", c);
-        if (c == '\n' || c == EOF)
-        {
-            fprintf(arq, "\n");
-            break;
-        }
-
-        fseek(arq, -1, SEEK_CUR);
-        fprintf(arq, "");
-        fseek(arq, +1, SEEK_CUR);
-    }
+    fprintf(arq, "%s", txt);
 
     fseek(arq, cursor, SEEK_SET);
 }
 
+void adicionar_item(FILE* arq, char* txt, char* jogo)
+{
+
+}
 
 #endif // STEAMDB_H_INCLUDED
