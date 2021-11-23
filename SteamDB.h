@@ -3,28 +3,50 @@
 
 #include <string.h>
 #include <locale.h>
+#include <stdbool.h>
 #include <unistd.h>
 #include <sys/types.h>
 
-struct Game
+typedef struct
 {
-    char* nome;
-    char* genero[100];
+    char* nome[64];
+    char* genero[64];
     double preco;
-    int avaliacao;
-};
+    int estrelas;
+    int avaliacoes;
+} Game;
 
-struct Publisher
+typedef struct
 {
-    char nome[100];
-    struct Game lista[100];
-};
+    Game game;
+    bool null;
+} GameNode;
 
-struct User
+
+typedef struct
 {
-    char userName[100];
-    struct Game biblioteca[100];
-};
+    char nome[64];
+    Game lista[1024];
+} Publisher;
+
+typedef struct
+{
+    Publisher publisher;
+    bool null;
+} PublisherNode;
+
+
+typedef struct
+{
+    char userName[64];
+    Game biblioteca[1024];
+} User;
+
+typedef struct
+{
+    //User user;
+    bool null;
+} UserNode;
 
 
 // Posiciona o cursor no começo de uma linha
@@ -212,7 +234,7 @@ void get_item(FILE *arq, int line, int collumn, char* vetor)
 }
 
 // Retorna o número de caracateres de um arquivo (incluindo "\n" e "EOF")
-int len(FILE* arq)
+int character_length(FILE* arq)
 {
     int cursor = ftell(arq);
 
@@ -349,7 +371,7 @@ void clear_array(char* vetor, int len)
 
 
 // Printa o arquivo CSV jogos na tela
-void listar_jogo(FILE *arq)
+void print_games(FILE *arq)
 {
     setlocale(LC_ALL, "");
     int cursor = ftell(arq);
@@ -379,7 +401,7 @@ void listar_jogo(FILE *arq)
 }
 
 // Printa o arquivo CSV publishers e users na tela
-void listar(FILE* arq)
+void print_publishers_users(FILE* arq)
 {
     setlocale(LC_ALL, "");
     int cursor = ftell(arq);
@@ -411,7 +433,7 @@ void listar(FILE* arq)
 }
 
 // Remove uma linha do arquivo
-void remover_linha(FILE* arq, int linha)
+void remove_line(FILE* arq, int linha)
 {
     char txt1[length_until(arq, linha-1)];
     char txt2[length_from(arq, linha+1)];
@@ -428,7 +450,7 @@ void remover_linha(FILE* arq, int linha)
 }
 
 // Adiciona uma linha ao final do arquivo
-void adicionar_linha(FILE* arq, char* txt)
+void add_line(FILE* arq, char* txt)
 {
     int cursor = ftell(arq);
 
@@ -439,9 +461,23 @@ void adicionar_linha(FILE* arq, char* txt)
     fseek(arq, cursor, SEEK_SET);
 }
 
-void adicionar_item(FILE* arq, char* txt, char* jogo)
+// Adiciona um item na linha indicada
+void add_item_to_line(FILE* arq, char* item, int linha)
 {
+    int cursor = ftell(arq);
 
+    char txt1[length_until(arq, linha)];
+    char txt2[length_from(arq, linha+1)];
+    get_file_until(arq, txt1, linha);
+    get_file_from(arq, txt2, linha+1);
+
+    fprintf(arq, "%s", txt1);
+    fseek(arq, -2, SEEK_CUR);
+    fprintf(arq, ";%s\n", item);
+    fprintf(arq, "%s", txt2);
+    ftruncate(fileno(arq), sizeof txt1 + sizeof item + 2 + sizeof txt2);
+
+    fseek(arq, cursor, SEEK_SET);
 }
 
 #endif // STEAMDB_H_INCLUDED

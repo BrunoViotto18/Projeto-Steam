@@ -10,52 +10,64 @@ int main()
 {
     setlocale(LC_ALL, "");
 
-    FILE *jogos;
-    FILE *publishers;
-    FILE *users;
+    FILE *arq_jogos;
+    FILE *arq_publishers;
+    FILE *arq_users;
 
-    jogos = fopen("Teste.csv", "rt+");
-    publishers = fopen("Publishers.csv", "rt+");
-    users = fopen("Users.csv", "rt+");
+    arq_jogos = fopen("Teste2.csv", "rt+");
+    arq_publishers = fopen("Publishers.csv", "rt+");
+    arq_users = fopen("Users.csv", "rt+");
 
-    adicionar_linha(jogos, "Digital Devil Saga;RPG;20;8\n");
+    GameNode lista_games[1024];
+    PublisherNode lista_publishers[1024];
+    //UserNode lista_users[1024];
 
 
-    /*bool con = true;
+    /*for (int i = 0; i < 1024; i++)
+    {
+        lista_games[i] = NULL;
+        lista_publishers[i] = NULL;
+        lista_users[i] = NULL;
+    }*/
+
+    bool con = true;
     int op;
 
     while (con)
     {
-        printf("MENU\n[ 1 ] Listar \n[ 2 ] Adicionar \n[ 3 ] Remover \n[ 4 ] Sair \nEscolha: ");
+        printf("MENU\n[ 1 ] Listar \n[ 2 ] Adicionar \n[ 3 ] Salvar \n[ 4 ] Comprar Jogo \n[ 5 ] Remover \n[ 6 ] Sair \nEscolha: ");
         scanf("%d", &op);
         system("cls");
 
         switch (op)
         {
+
             // --- LISTAR ---
+
             case 1:
                 printf("LISTAR: \n[ 1 ] Jogos \n[ 2 ] Publishers \n[ 3 ] Usuários \n[ 4 ] Voltar ao menu \nEscolha: ");
                 scanf("%d", &op);
                 system("cls");
+
                 switch(op)
                 {
                     case 1:
                         printf("JOGOS\n\n");
-                        listar_jogo(jogos);
+                        print_games(arq_jogos);
                         getch();
                         system("cls");
                         break;
 
                     case 2:
-
                         printf("PUBLISHERS\n\n");
-                        listar(publishers);
+                        print_publishers_users(arq_publishers);
                         getch();
                         system("cls");
                         break;
+
                     case 3:
                         printf("USUÁRIOS\n\n");
-                        listar(users);
+                        print_publishers_users(arq_users);
                         getch();
                         system("cls");
                         break;
@@ -72,11 +84,51 @@ int main()
                 }
                 break;
 
+
+
             // --- ADICIONAR ---
+
             case 2:
-                printf("ADICIONAR: \n[ 1 ] Jogos\n[ 2 ] Publishers \n[ 3 ] Usuários \n[ 4 ] Voltar ao menu \nEscolha: ");
+                printf("ADICIONAR: \n[ 1 ] Jogo \n[ 2 ] Publisher \n[ 3 ] Usuário \n[ 4 ] Voltar ao menu \nEscolha: ");
                 scanf("%d", &op);
                 system("cls");
+
+                switch(op)
+                {
+                    case 1:
+                        /*nome
+                        genero
+                        preco*/
+
+                        break;
+
+                    case 2:
+                        break;
+
+                    case 3:
+                        break;
+
+                    case 4:
+                        system("cls");
+                        break;
+
+                    default:
+                        printf("Opção Inválida!");
+                        getch();
+                        system("cls");
+                        break;
+                }
+                break;
+
+
+
+            // --- SALVAR ---
+
+            case 3:
+                printf("SALVAR: \n[ 1 ] Jogos \n[ 2 ] Publishers \n[ 3 ] Usuários \n[ 4 ] Voltar ao menu \nEscolha: ");
+                scanf("%d", &op);
+                system("cls");
+
                 switch(op)
                 {
                     char nome[128];
@@ -116,8 +168,18 @@ int main()
                 }
                 break;
 
+
+
+            // -- COMPRAR JOGO --
+
+            case 4:
+                break;
+
+
+
             // --- REMOVER ---
-            case 3:
+
+            case 5:
                 printf("REMOVER: \n[ 1 ] Jogos\n[ 2 ] Publishers \n[ 3 ] Usuários \n[ 4 ] Voltar ao  \nEscolha: ");
                 scanf("%d", &op);
                 system("cls");
@@ -126,17 +188,17 @@ int main()
                     case 1:
                         printf("JOGOS\n\n");
 
-                        for (int i = 2; i < count_lines(jogos); i++)
+                        for (int i = 2; i < count_lines(arq_jogos); i++)
                         {
-                            char c[len_item(jogos, i, 1)];
-                            get_item(jogos, i, 1, c);
+                            char c[len_item(arq_jogos, i, 1)];
+                            get_item(arq_jogos, i, 1, c);
                             printf("[ %d ] %s\n", i-1, c);
-                            clear_array(c, len_item(jogos, i, 1));
+                            clear_array(c, len_item(arq_jogos, i, 1));
                         }
 
                         printf("\nEscolha o jogo a ser removido: ");
                         scanf("%d", &op);
-                        remover(jogos, op+1);
+                        remove_line(arq_jogos, op+1);
                         getch();
                         system("cls");
                         break;
@@ -159,21 +221,27 @@ int main()
                 }
                 break;
 
+
+
             // --- SAIR ---
-            case 4:
+
+            case 6:
                 con = false;
                 break;
 
+
+
             // --- DEFAULT ---
+
             default:
                 printf("Opção inválida! Tente novamente.");
                 break;
         }
-    }*/
+    }
 
-    fclose(jogos);
-    fclose(publishers);
-    fclose(users);
+    fclose(arq_jogos);
+    fclose(arq_publishers);
+    fclose(arq_users);
 
     return 0;
 }
