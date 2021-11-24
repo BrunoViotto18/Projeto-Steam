@@ -46,7 +46,7 @@ int main()
 
             case 1:
                 printf("LISTAR: \n\n[ 1 ] Jogos \n[ 2 ] Publishers \n[ 3 ] Usuários \n[ 4 ] Voltar ao menu \n\nOpção: ");
-                scanf("%d", &op);
+                fget("%d", &op);
                 system("cls");
 
                 switch(op)
@@ -101,7 +101,7 @@ int main()
 
                     case 1:
                         printf("Nome: ");
-                        fgets(nome, 64, stdin);
+                        fgetc(stdin);
                         fgets(nome, 64, stdin);
                         printf("Gênero: ");
                         fgets(genero, 64, stdin);
