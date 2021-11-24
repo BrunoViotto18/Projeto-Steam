@@ -14,7 +14,7 @@
 	<unistd.h>
 	<sys/types.h>
 
-1637451599 source:c:\users\win8\desktop\github\projeto-steam\main.c
+1637707800 source:c:\users\win8\desktop\github\projeto-steam\main.c
 	<stdio.h>
 	<stdlib.h>
 	<stdbool.h>
@@ -23,7 +23,7 @@
 	<string.h>
 	"SteamDB.h"
 
-1637451696 c:\users\win8\desktop\github\projeto-steam\steamdb.h
+1637708367 c:\users\win8\desktop\github\projeto-steam\steamdb.h
 	<string.h>
 	<locale.h>
 	<stdbool.h>

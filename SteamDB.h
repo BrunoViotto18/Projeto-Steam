@@ -18,7 +18,7 @@ typedef struct
 
 typedef struct
 {
-    Game game;
+    Game* game;
     bool null;
 } GameNode;
 
@@ -31,7 +31,7 @@ typedef struct
 
 typedef struct
 {
-    Publisher publisher;
+    Publisher* publisher;
     bool null;
 } PublisherNode;
 
@@ -44,7 +44,7 @@ typedef struct
 
 typedef struct
 {
-    //User user;
+    User* user;
     bool null;
 } UserNode;
 
@@ -230,6 +230,8 @@ void get_item(FILE *arq, int line, int collumn, char* vetor)
         i++;
     }
 
+    vetor[i] = '\0';
+
     fseek(arq, cursor, SEEK_SET);
 }
 
@@ -389,6 +391,7 @@ void print_games(FILE *arq)
 
             get_item(arq, 1, j, chave);
             get_item(arq, i, j, valor);
+
             printf("%s: %s\n", chave, valor);
 
             clear_array(chave, len_item(arq, 1, j));

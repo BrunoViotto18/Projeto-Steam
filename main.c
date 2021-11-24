@@ -20,7 +20,7 @@ int main()
 
     GameNode lista_games[1024];
     PublisherNode lista_publishers[1024];
-    //UserNode lista_users[1024];
+    UserNode lista_users[1024];
 
 
     /*for (int i = 0; i < 1024; i++)
@@ -35,7 +35,7 @@ int main()
 
     while (con)
     {
-        printf("MENU\n[ 1 ] Listar \n[ 2 ] Adicionar \n[ 3 ] Salvar \n[ 4 ] Comprar Jogo \n[ 5 ] Remover \n[ 6 ] Sair \nEscolha: ");
+        printf("MENU \n\n[ 1 ] Listar \n[ 2 ] Adicionar \n[ 3 ] Salvar \n[ 4 ] Comprar Jogo \n[ 5 ] Remover \n[ 6 ] Sair \n\nOpção: ");
         scanf("%d", &op);
         system("cls");
 
@@ -45,7 +45,7 @@ int main()
             // --- LISTAR ---
 
             case 1:
-                printf("LISTAR: \n[ 1 ] Jogos \n[ 2 ] Publishers \n[ 3 ] Usuários \n[ 4 ] Voltar ao menu \nEscolha: ");
+                printf("LISTAR: \n\n[ 1 ] Jogos \n[ 2 ] Publishers \n[ 3 ] Usuários \n[ 4 ] Voltar ao menu \n\nOpção: ");
                 scanf("%d", &op);
                 system("cls");
 
@@ -89,17 +89,25 @@ int main()
             // --- ADICIONAR ---
 
             case 2:
-                printf("ADICIONAR: \n[ 1 ] Jogo \n[ 2 ] Publisher \n[ 3 ] Usuário \n[ 4 ] Voltar ao menu \nEscolha: ");
+                printf("ADICIONAR: \n\n[ 1 ] Jogo \n[ 2 ] Publisher \n[ 3 ] Usuário \n[ 4 ] Voltar ao menu \n\nOpção: ");
                 scanf("%d", &op);
                 system("cls");
 
                 switch(op)
                 {
-                    case 1:
-                        /*nome
-                        genero
-                        preco*/
+                    char nome[64];
+                    char genero[64];
+                    double preco;
 
+                    case 1:
+                        printf("Nome: ");
+                        fgets(nome, 64, stdin);
+                        fgets(nome, 64, stdin);
+                        printf("Gênero: ");
+                        fgets(genero, 64, stdin);
+                        printf("Preço: ");
+                        scanf("%f", &preco);
+                        printf("%s %s %f", nome, genero, preco);
                         break;
 
                     case 2:
@@ -125,7 +133,7 @@ int main()
             // --- SALVAR ---
 
             case 3:
-                printf("SALVAR: \n[ 1 ] Jogos \n[ 2 ] Publishers \n[ 3 ] Usuários \n[ 4 ] Voltar ao menu \nEscolha: ");
+                printf("SALVAR: \n\n[ 1 ] Jogos \n[ 2 ] Publishers \n[ 3 ] Usuários \n[ 4 ] Voltar ao menu \n\nOpção: ");
                 scanf("%d", &op);
                 system("cls");
 
@@ -180,7 +188,7 @@ int main()
             // --- REMOVER ---
 
             case 5:
-                printf("REMOVER: \n[ 1 ] Jogos\n[ 2 ] Publishers \n[ 3 ] Usuários \n[ 4 ] Voltar ao  \nEscolha: ");
+                printf("REMOVER: \n\n[ 1 ] Jogos\n[ 2 ] Publishers \n[ 3 ] Usuários \n[ 4 ] Voltar ao Menu \n\nOpção: ");
                 scanf("%d", &op);
                 system("cls");
                 switch (op)
